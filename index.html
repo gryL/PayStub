@@ -11,7 +11,7 @@
   <div class="container">
     <div class="header">
       <div class="brand">
-        <img id="companyLogoDisplay" class="logo" aria-hidden="true" />
+        <img id="companyLogoDisplay" class="logo" />
         <h1 id="companyNameDisplay">Your Company Name</h1>
       </div>
 
@@ -23,7 +23,7 @@
     </div>
 
     <!-- PAYSTUB CARD -->
-    <div class="card" id="paystubCard">
+    <div class="card">
       <div class="card-header">
         <div>
           <h2 id="positionTitle">Pay Stub</h2>
@@ -45,13 +45,13 @@
 
       <div class="section">
         <h3>Earnings</h3>
-        <table aria-label="Earnings">
+        <table>
           <thead>
             <tr>
               <th>Description</th>
               <th>Hours/Units</th>
               <th>Rate</th>
-              <th>Amount (USD)</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody id="earningsTable"></tbody>
@@ -60,11 +60,11 @@
 
       <div class="section">
         <h3>Deductions</h3>
-        <table aria-label="Deductions">
+        <table>
           <thead>
             <tr>
               <th>Description</th>
-              <th>Amount (USD)</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody id="deductionsTable"></tbody>
@@ -72,18 +72,18 @@
       </div>
 
       <div class="section">
-        <h3>Net pay</h3>
+        <h3>Net Pay</h3>
         <div class="totals">
           <div class="total-card">
-            <div class="label">Gross pay</div>
+            <div class="label">Gross Pay</div>
             <div class="value" id="grossPayDisplay">$0.00</div>
           </div>
           <div class="total-card">
-            <div class="label">Total deductions</div>
+            <div class="label">Total Deductions</div>
             <div class="value" id="totalDeductionsDisplay">$0.00</div>
           </div>
           <div class="total-card">
-            <div class="label">Net amount</div>
+            <div class="label">Net Amount</div>
             <div class="value netpay" id="netPayDisplay">$0.00</div>
           </div>
         </div>
@@ -126,7 +126,6 @@
       <input type="date" id="payDate">
 
       <h3>Pay Type</h3>
-      <label>Pay Type</label>
       <select id="payType" onchange="togglePayFields()">
         <option value="annual">Annual Salary</option>
         <option value="hourly">Hourly Wage</option>
@@ -147,13 +146,19 @@
 
       <h3>Bonuses</h3>
       <div id="bonusList">
-        <input type="number" class="bonusInput" placeholder="Bonus amount ($)">
+        <div class="bonusRow">
+          <input type="text" class="bonusName" placeholder="Bonus name">
+          <input type="number" class="bonusAmount" placeholder="Amount ($)">
+        </div>
       </div>
       <button type="button" class="secondary" onclick="addBonusField()">Add Bonus</button>
 
       <h3>Other Deductions</h3>
       <div id="deductionList">
-        <input type="number" class="deductionInput" placeholder="Deduction amount ($)">
+        <div class="deductionRow">
+          <input type="text" class="deductionName" placeholder="Deduction name">
+          <input type="number" class="deductionAmount" placeholder="Amount ($)">
+        </div>
       </div>
       <button type="button" class="secondary" onclick="addDeductionField()">Add Deduction</button>
 
