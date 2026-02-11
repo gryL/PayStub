@@ -1,50 +1,169 @@
-<!-- PAYSTUB INPUT MODAL -->
-<div id="paystubModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Online Pay Stub Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-    <h2>Paystub Information</h2>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <img id="companyLogoDisplay" class="logo" aria-hidden="true" />
+        <h1 id="companyNameDisplay">Your Company Name</h1>
+      </div>
+      <div class="actions">
+        <button class="primary" onclick="window.print()">Print</button>
+        <button onclick="downloadStub()">Download HTML</button>
+        <button onclick="openModal()">Generate New Paystub</button>
+      </div>
+    </div>
 
-    <label>Employee Name</label>
-    <input type="text" id="empName">
+    <!-- PAYSTUB CARD -->
+    <div class="card" id="paystubCard">
+      <div class="card-header">
+        <div>
+          <h2 id="positionTitle">Pay Stub</h2>
+          <div class="meta">
+            <div><strong>Employee:</strong> <span id="empNameDisplay">—</span></div>
+            <div><strong>Position:</strong> <span id="empPositionDisplay">—</span></div>
+            <div><strong>Pay period:</strong> <span id="payPeriodDisplay">—</span></div>
+            <div><strong>Pay date:</strong> <span id="payDateDisplay">—</span></div>
+          </div>
+        </div>
 
-    <label>Company Name</label>
-    <input type="text" id="companyName">
+        <div class="meta">
+          <div><strong>Employee ID:</strong> <span id="empIdDisplay">—</span></div>
+          <div><strong>Department:</strong> <span id="empDeptDisplay">—</span></div>
+          <div><strong>Location:</strong> <span id="empLocationDisplay">—</span></div>
+          <div><strong>Deposit acct:</strong> <span id="empAcctDisplay">—</span></div>
+        </div>
+      </div>
 
-    <label>Company Address / Info</label>
-    <textarea id="companyInfo"></textarea>
+      <div class="section">
+        <h3>Earnings</h3>
+        <table aria-label="Earnings">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Hours/Units</th>
+              <th>Rate</th>
+              <th>Amount (USD)</th>
+            </tr>
+          </thead>
+          <tbody id="earningsTable"></tbody>
+        </table>
+      </div>
 
-    <label>Company Logo</label>
-    <input type="file" id="companyLogo" accept="image/*">
+      <div class="section">
+        <h3>Deductions</h3>
+        <table aria-label="Deductions">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Amount (USD)</th>
+            </tr>
+          </thead>
+          <tbody id="deductionsTable"></tbody>
+        </table>
+      </div>
 
-    <label>Annual Salary ($)</label>
-    <input type="number" id="annualSalary">
+      <div class="section">
+        <h3>Net pay</h3>
+        <div class="totals">
+          <div class="total-card">
+            <div class="label">Gross pay</div>
+            <div class="value" id="grossPayDisplay">$0.00</div>
+          </div>
+          <div class="total-card">
+            <div class="label">Total deductions</div>
+            <div class="value" id="totalDeductionsDisplay">$0.00</div>
+          </div>
+          <div class="total-card">
+            <div class="label">Net amount</div>
+            <div class="value netpay" id="netPayDisplay">$0.00</div>
+          </div>
+        </div>
+      </div>
 
-    <label>Bonuses ($)</label>
-    <input type="number" id="bonus">
-
-    <label>Additional Deductions ($)</label>
-    <input type="number" id="extraDeductions">
-
-    <label>State of Employment</label>
-    <select id="state">
-      <option value="MS">Mississippi</option>
-      <option value="AL">Alabama</option>
-      <option value="TN">Tennessee</option>
-      <option value="TX">Texas</option>
-      <option value="FL">Florida</option>
-      <!-- Add more -->
-    </select>
-
-    <h3>Insurance Options</h3>
-
-    <label><input type="checkbox" id="healthIns"> Health Insurance</label>
-    <label><input type="checkbox" id="dentalIns"> Dental Insurance</label>
-    <label><input type="checkbox" id="visionIns"> Vision Insurance</label>
-
-    <label>FSA Contribution ($)</label>
-    <input type="number" id="fsaAmount">
-
-    <button id="submitPaystub">Generate Paystub</button>
+      <div class="footer">
+        <div id="companyInfoDisplay">© Your Company</div>
+      </div>
+    </div>
   </div>
-</div>
+
+  <!-- MODAL -->
+  <div id="paystubModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Paystub Information</h2>
+
+      <label>Employee Name</label>
+      <input type="text" id="empName">
+
+      <label>Position Title</label>
+      <input type="text" id="empPosition">
+
+      <label>Department</label>
+      <input type="text" id="empDept">
+
+      <label>Employee ID</label>
+      <input type="text" id="empId">
+
+      <label>Location</label>
+      <input type="text" id="empLocation">
+
+      <label>Deposit Account (last 4)</label>
+      <input type="text" id="empAcct">
+
+      <label>Pay Period</label>
+      <input type="text" id="payPeriod">
+
+      <label>Pay Date</label>
+      <input type="date" id="payDate">
+
+      <label>Annual Salary ($)</label>
+      <input type="number" id="annualSalary">
+
+      <label>Bonus ($)</label>
+      <input type="number" id="bonus">
+
+      <label>Additional Deductions ($)</label>
+      <input type="number" id="extraDeductions">
+
+      <label>State of Employment</label>
+      <select id="state">
+        <option value="MS">Mississippi</option>
+        <option value="AL">Alabama</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="FL">Florida</option>
+      </select>
+
+      <h3>Insurance Options</h3>
+      <label><input type="checkbox" id="healthIns"> Health Insurance</label>
+      <label><input type="checkbox" id="dentalIns"> Dental Insurance</label>
+      <label><input type="checkbox" id="visionIns"> Vision Insurance</label>
+
+      <label>FSA Contribution ($)</label>
+      <input type="number" id="fsaAmount">
+
+      <h3>Company Info</h3>
+      <label>Company Name</label>
+      <input type="text" id="companyName">
+
+      <label>Company Info / Footer</label>
+      <textarea id="companyInfo"></textarea>
+
+      <label>Company Logo</label>
+      <input type="file" id="companyLogo" accept="image/*">
+
+      <button class="primary" onclick="submitPaystub()">Generate Paystub</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
