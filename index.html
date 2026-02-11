@@ -14,6 +14,7 @@
         <img id="companyLogoDisplay" class="logo" aria-hidden="true" />
         <h1 id="companyNameDisplay">Your Company Name</h1>
       </div>
+
       <div class="actions">
         <button class="primary" onclick="window.print()">Print</button>
         <button onclick="downloadStub()">Download HTML</button>
@@ -124,8 +125,28 @@
       <label>Pay Date</label>
       <input type="date" id="payDate">
 
-      <label>Annual Salary ($)</label>
-      <input type="number" id="annualSalary">
+      <h3>Pay Type</h3>
+
+      <label>Pay Type</label>
+      <select id="payType" onchange="togglePayFields()">
+        <option value="annual">Annual Salary</option>
+        <option value="hourly">Hourly Wage</option>
+      </select>
+
+      <!-- Annual Salary -->
+      <div id="annualFields">
+        <label>Annual Salary ($)</label>
+        <input type="number" id="annualSalary">
+      </div>
+
+      <!-- Hourly Wage -->
+      <div id="hourlyFields" style="display:none;">
+        <label>Hourly Rate ($)</label>
+        <input type="number" id="hourlyRate">
+
+        <label>Hours per Week</label>
+        <input type="number" id="hoursPerWeek">
+      </div>
 
       <label>Bonus ($)</label>
       <input type="number" id="bonus">
@@ -151,6 +172,7 @@
       <input type="number" id="fsaAmount">
 
       <h3>Company Info</h3>
+
       <label>Company Name</label>
       <input type="text" id="companyName">
 
