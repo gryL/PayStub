@@ -48,14 +48,14 @@ function calcStateTax(state, amount) {
 }
 
 function submitPaystub() {
-  const empName = document.getElementById("empName").value;
-  const empPosition = document.getElementById("empPosition").value;
-  const empDept = document.getElementById("empDept").value;
-  const empId = document.getElementById("empId").value;
-  const empLocation = document.getElementById("empLocation").value;
-  const empAcct = document.getElementById("empAcct").value;
-  const payPeriod = document.getElementById("payPeriod").value;
-  const payDate = document.getElementById("payDate").value;
+  const empName = document.getElementById("empName").value || "—";
+  const empPosition = document.getElementById("empPosition").value || "—";
+  const empDept = document.getElementById("empDept").value || "—";
+  const empId = document.getElementById("empId").value || "—";
+  const empLocation = document.getElementById("empLocation").value || "—";
+  const empAcct = document.getElementById("empAcct").value || "";
+  const payPeriod = document.getElementById("payPeriod").value || "—";
+  const payDate = document.getElementById("payDate").value || "—";
 
   const payType = document.getElementById("payType").value;
   let biweeklyGross = 0;
@@ -80,7 +80,7 @@ function submitPaystub() {
     earningsRows += `
       <tr>
         <td>Hourly Pay</td>
-        <td>${hoursBiweekly}</td>
+        <td>${hoursBiweekly.toFixed(2)}</td>
         <td>$${hourlyRate.toFixed(2)}</td>
         <td>$${biweeklyGross.toFixed(2)}</td>
       </tr>
@@ -130,7 +130,7 @@ function submitPaystub() {
   const vision = parseFloat(document.getElementById("visionAmount").value) || 0;
   const fsa = parseFloat(document.getElementById("fsaAmount").value) || 0;
 
-  const state = document.getElementById("state").value;
+  const state = document.getElementById("state").value || "MS";
   const federalTax = calcFederalTax(gross);
   const stateTax = calcStateTax(state, gross);
 
@@ -149,8 +149,8 @@ function submitPaystub() {
   document.getElementById("payPeriodDisplay").textContent = payPeriod;
   document.getElementById("payDateDisplay").textContent = payDate;
 
-  const companyName = document.getElementById("companyName").value;
-  const companyInfo = document.getElementById("companyInfo").value;
+  const companyName = document.getElementById("companyName").value || "Your Company Name";
+  const companyInfo = document.getElementById("companyInfo").value || "© Your Company";
 
   document.getElementById("companyNameDisplay").textContent = companyName;
   document.getElementById("companyInfoDisplay").textContent = companyInfo;
