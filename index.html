@@ -11,7 +11,7 @@
   <div class="container">
     <div class="header">
       <div class="brand">
-        <img id="companyLogoDisplay" class="logo" />
+        <img id="companyLogoDisplay" class="logo" alt="Company logo" />
         <h1 id="companyNameDisplay">Your Company Name</h1>
       </div>
 
@@ -22,7 +22,6 @@
       </div>
     </div>
 
-    <!-- PAYSTUB CARD -->
     <div class="card">
       <div class="card-header">
         <div>
@@ -113,17 +112,26 @@
       <label>Employee ID</label>
       <input type="text" id="empId">
 
-      <label>Location</label>
+      <label>Location (City, State)</label>
       <input type="text" id="empLocation">
 
       <label>Deposit Account (last 4)</label>
       <input type="text" id="empAcct">
 
       <label>Pay Period</label>
-      <input type="text" id="payPeriod">
+      <input type="text" id="payPeriod" placeholder="e.g., Feb 1 – Feb 14, 2026">
 
       <label>Pay Date</label>
       <input type="date" id="payDate">
+
+      <label>State for Tax</label>
+      <select id="state">
+        <option value="MS">Mississippi</option>
+        <option value="AL">Alabama</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="FL">Florida</option>
+      </select>
 
       <h3>Pay Type</h3>
       <select id="payType" onchange="togglePayFields()">
