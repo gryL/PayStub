@@ -8,11 +8,13 @@
   --good: #0f766e;
 }
 
+* { box-sizing: border-box; }
+
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .container {
@@ -25,6 +27,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .logo {
@@ -35,8 +44,9 @@ body {
   background: #ddd;
 }
 
-.actions button {
-  margin-left: 8px;
+.actions {
+  display: flex;
+  gap: 8px;
 }
 
 button {
@@ -45,18 +55,23 @@ button {
   border: 1px solid var(--border);
   background: var(--card);
   cursor: pointer;
+  font-size: 14px;
 }
 
 button.primary {
   background: var(--accent);
   color: white;
+  border-color: var(--accent);
 }
 
 button.secondary {
   background: #eef2ff;
   border-color: #c7d2fe;
   color: #1e3a8a;
-  margin-bottom: 8px;
+}
+
+button:hover {
+  transform: translateY(-1px);
 }
 
 .card {
@@ -64,7 +79,7 @@ button.secondary {
   border: 1px solid var(--border);
   border-radius: 12px;
   margin-top: 20px;
-  padding-bottom: 20px;
+  overflow: hidden;
 }
 
 .card-header {
@@ -72,17 +87,32 @@ button.secondary {
   border-bottom: 1px solid var(--border);
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 .meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 6px 16px;
   font-size: 14px;
+  color: var(--muted);
+}
+
+.meta strong {
+  color: var(--text);
 }
 
 .section {
   padding: 16px;
   border-bottom: 1px solid var(--border);
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h3 {
+  margin: 0 0 12px;
 }
 
 table {
@@ -92,26 +122,40 @@ table {
 
 thead th {
   background: #f9fafb;
-  padding: 10px;
+  padding: 8px 10px;
   font-size: 13px;
   color: var(--muted);
+  text-align: left;
 }
 
 tbody td {
-  padding: 10px;
+  padding: 8px 10px;
   border-bottom: 1px solid var(--border);
+  font-size: 14px;
 }
 
 .totals {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 
 .total-card {
-  flex: 1;
   border: 1px dashed var(--border);
-  padding: 12px;
   border-radius: 10px;
+  padding: 12px;
+  background: #fcfdff;
+}
+
+.total-card .label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.total-card .value {
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 4px;
 }
 
 .netpay {
@@ -131,10 +175,11 @@ tbody td {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.6);
+  z-index: 9999;
 }
 
 .modal-content {
-  background: white;
+  background: #fff;
   width: 480px;
   max-width: 95%;
   margin: 3% auto;
@@ -144,18 +189,71 @@ tbody td {
   overflow-y: auto;
 }
 
+.modal-content h2, .modal-content h3 {
+  margin-top: 0;
+}
+
+.modal-content label {
+  font-size: 13px;
+  margin-bottom: 4px;
+  display: block;
+}
+
 .modal-content input,
 .modal-content textarea,
 .modal-content select {
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
-  border: 1px solid var(--border);
   border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.bonusRow,
+.deductionRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.bonusRow input,
+.deductionRow input {
+  flex: 1;
 }
 
 .close {
   float: right;
   font-size: 24px;
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .card-header {
+    grid-template-columns: 1fr;
+  }
+  .meta {
+    grid-template-columns: 1fr;
+  }
+  .totals {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+  .container {
+    margin: 0;
+    padding: 0;
+  }
+  .actions,
+  .modal {
+    display: none !important;
+  }
+  .card {
+    border: none;
+    box-shadow: none;
+  }
 }
