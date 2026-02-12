@@ -37,11 +37,11 @@ body {
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
-  border-radius: 8px;
-  background: #ddd;
+  border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .actions {
